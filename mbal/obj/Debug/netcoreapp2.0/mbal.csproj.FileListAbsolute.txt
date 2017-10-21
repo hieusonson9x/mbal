@@ -1,0 +1,11 @@
+C:\Users\MinhHieu\source\repos\mbal\mbal\bin\Debug\netcoreapp2.0\mbal.deps.json
+C:\Users\MinhHieu\source\repos\mbal\mbal\bin\Debug\netcoreapp2.0\mbal.runtimeconfig.json
+C:\Users\MinhHieu\source\repos\mbal\mbal\bin\Debug\netcoreapp2.0\mbal.runtimeconfig.dev.json
+C:\Users\MinhHieu\source\repos\mbal\mbal\bin\Debug\netcoreapp2.0\mbal.dll
+C:\Users\MinhHieu\source\repos\mbal\mbal\bin\Debug\netcoreapp2.0\mbal.pdb
+C:\Users\MinhHieu\source\repos\mbal\mbal\obj\Debug\netcoreapp2.0\mbal.csprojResolveAssemblyReference.cache
+C:\Users\MinhHieu\source\repos\mbal\mbal\obj\Debug\netcoreapp2.0\mbal.csproj.CoreCompileInputs.cache
+C:\Users\MinhHieu\source\repos\mbal\mbal\obj\Debug\netcoreapp2.0\mbal.AssemblyInfoInputs.cache
+C:\Users\MinhHieu\source\repos\mbal\mbal\obj\Debug\netcoreapp2.0\mbal.AssemblyInfo.cs
+C:\Users\MinhHieu\source\repos\mbal\mbal\obj\Debug\netcoreapp2.0\mbal.dll
+C:\Users\MinhHieu\source\repos\mbal\mbal\obj\Debug\netcoreapp2.0\mbal.pdb
