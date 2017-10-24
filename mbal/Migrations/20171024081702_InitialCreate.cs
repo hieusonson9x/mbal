@@ -47,7 +47,7 @@ namespace mbal.Migrations
                 name: "products",
                 columns: table => new
                 {
-                    ProductId = table.Column<long>(type: "bigint", nullable: false)
+                    ProductID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Money = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PayMethod = table.Column<int>(type: "int", nullable: false),
@@ -57,7 +57,7 @@ namespace mbal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_products", x => x.ProductId);
+                    table.PrimaryKey("PK_products", x => x.ProductID);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,6 +68,7 @@ namespace mbal.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     fullname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    role = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     username = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -86,10 +87,10 @@ namespace mbal.Migrations
                     CoverageRate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Create_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Create_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CustomerID = table.Column<long>(type: "bigint", nullable: true),
+                    CustomerID = table.Column<long>(type: "bigint", nullable: false),
                     DurationOfInsurrance = table.Column<int>(type: "int", nullable: false),
                     FormOfPayment = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<long>(type: "bigint", nullable: true),
+                    ProductID = table.Column<long>(type: "bigint", nullable: false),
                     StatusContract = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StatusFee = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -101,13 +102,13 @@ namespace mbal.Migrations
                         column: x => x.CustomerID,
                         principalTable: "customers",
                         principalColumn: "CustomerID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_insurrances_products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_insurrances_products_ProductID",
+                        column: x => x.ProductID,
                         principalTable: "products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -116,9 +117,9 @@ namespace mbal.Migrations
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_insurrances_ProductId",
+                name: "IX_insurrances_ProductID",
                 table: "insurrances",
-                column: "ProductId");
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

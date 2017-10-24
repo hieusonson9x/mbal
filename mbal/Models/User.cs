@@ -11,5 +11,6 @@ namespace mbal.Models
         public string username { get; set; }
         public string password { get; set; }
         public string fullname { get; set; }
+        public string role { get; set; }
     }
 }

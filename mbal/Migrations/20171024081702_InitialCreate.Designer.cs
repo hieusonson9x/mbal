@@ -11,7 +11,7 @@ using System;
 namespace mbal.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20171022131936_InitialCreate")]
+    [Migration("20171024081702_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,13 +76,13 @@ namespace mbal.Migrations
 
                     b.Property<string>("Create_by");
 
-                    b.Property<long?>("CustomerID");
+                    b.Property<long>("CustomerID");
 
                     b.Property<int>("DurationOfInsurrance");
 
                     b.Property<int>("FormOfPayment");
 
-                    b.Property<long?>("ProductId");
+                    b.Property<long>("ProductID");
 
                     b.Property<string>("StatusContract");
 
@@ -92,14 +92,14 @@ namespace mbal.Migrations
 
                     b.HasIndex("CustomerID");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductID");
 
                     b.ToTable("insurrances");
                 });
 
             modelBuilder.Entity("mbal.Models.Product", b =>
                 {
-                    b.Property<long>("ProductId")
+                    b.Property<long>("ProductID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Money");
@@ -112,7 +112,7 @@ namespace mbal.Migrations
 
                     b.Property<string>("ProductStatus");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("ProductID");
 
                     b.ToTable("products");
                 });
@@ -126,6 +126,8 @@ namespace mbal.Migrations
 
                     b.Property<string>("password");
 
+                    b.Property<string>("role");
+
                     b.Property<string>("username");
 
                     b.HasKey("id");
@@ -137,11 +139,13 @@ namespace mbal.Migrations
                 {
                     b.HasOne("mbal.Models.Customer", "Customer")
                         .WithMany("Insurrances")
-                        .HasForeignKey("CustomerID");
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("mbal.Models.Product", "Product")
                         .WithMany("Insurrances")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

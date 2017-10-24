@@ -23,6 +23,10 @@ namespace mbal.Models
         public string Create_by { get; set; }
         public DateTime Create_at { get; set; }
 
+
+        public long CustomerID { get; set; }
+        public long ProductID { get; set; }
+
         public Customer Customer { get; set; }
         public Product Product { get; set; }
     }

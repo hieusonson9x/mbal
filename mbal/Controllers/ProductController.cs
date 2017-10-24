@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using mbal.Models;
+using mbal.Common;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,7 +30,9 @@ namespace mbal.Controllers
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            return _context.products.ToList();
+            var a = _context.products;
+            var data =  a.Include(p => p.Insurrances).ToList();
+            return data;
         }
 
         // GET api/values/5
@@ -56,13 +60,19 @@ namespace mbal.Controllers
         {
         }
 
-        [HttpGet("add", Name = "addproduct")]
-        public String add()
+        [HttpPost("add", Name = "addproduct")]
+        public IActionResult add([FromBody] Product product)
         {
-            _context.products.Add(new Models.Product { ProductName = "product1" });
+            if (product == null)
+            {
+                return new ObjectResult( new Message { status = "success", message = "Dữ liệu không hợp lệ" });
+            }
+             var a = _context.products.Where(p => p.ProductName == "product1").ToList();
+            _context.products.Add(product);
             _context.SaveChanges();
 
-            return "ok";
+            return new ObjectResult(new Message { status = "success", message = "Thêm thành công" });
         }
     }
+   
 }
