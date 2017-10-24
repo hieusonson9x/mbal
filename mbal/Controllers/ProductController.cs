@@ -37,41 +37,97 @@ namespace mbal.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult GetById(int id)
         {
-            return "value";
+            var product = _context.products.Where(p => p.ProductID == id).Include(p =>p.Insurrances).FirstOrDefault();
+            if(product == null)
+            {
+                return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = "Không tồn tại" });
+            }
+            return new ObjectResult(product);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("deleteById/{id}", Name ="deteleproduct")]
+        public IActionResult DeleteProductById(long id)
         {
+            var product = _context.products.Where(p => p.ProductID == id).FirstOrDefault();
+            if(product == null)
+            {
+                return new ObjectResult(new Message { status="error",message = "ID không tồn tại" });
+            }
+            else
+            {
+                _context.Entry(product).State = EntityState.Deleted;
+                _context.SaveChanges();
+                return new ObjectResult(new Message { status = "error", message = "Xóa thành công sản phẩm với ID " + id });
+
+            }
         }
+        [HttpDelete("deleteByCode/{code}", Name = "deteleproductCode")]
+        public IActionResult DeleteProductByCode(string code)
+        {
+            var product = _context.products.Where(p => p.ProductCode == code).FirstOrDefault();
+            if (product == null)
+            {
+                return new ObjectResult(new Message { status = "error", message = "Mã sản phẩm không tồn tại" });
+            }
+            else
+            {
+                _context.Entry(product).State = EntityState.Deleted;
+                _context.SaveChanges();
+                return new ObjectResult(new Message { status = "error", message = "Xóa thành công sản phẩm với mã sản phẩm:  " + code });
+            }
+        }
+
+
 
         [HttpPost("add", Name = "addproduct")]
         public IActionResult add([FromBody] Product product)
         {
             if (product == null)
             {
-                return new ObjectResult( new Message { status = "success", message = "Dữ liệu không hợp lệ" });
+                return new ObjectResult( new Message { status = "error", message = "Dữ liệu không hợp lệ" });
             }
-             var a = _context.products.Where(p => p.ProductName == "product1").ToList();
-            _context.products.Add(product);
-            _context.SaveChanges();
+             var a = _context.products.Where(p => p.ProductID == product.ProductID || p.ProductCode.Equals(product.ProductCode)).FirstOrDefault();
+            if (a == null)
+            {
+                product.ProductID = 0;
+                _context.products.Add(product);
+                _context.SaveChanges();
 
-            return new ObjectResult(new Message { status = "success", message = "Thêm thành công" });
+                return new ObjectResult(new Message { status = "success", message = "Thêm thành công" });
+            }
+            else
+            {
+                return new ObjectResult(new Message { status = "error", message = "Thêm thất bại, mã sản phẩm đã tồn tại" });
+            }
+        }
+
+        [HttpPost("update", Name = "updateproduct")]
+        public IActionResult update([FromBody] Product product)
+        {
+            if (product == null)
+            {
+                return new ObjectResult(new Message { status = "error", message = "Dữ liệu không hợp lệ" });
+            }
+            var a = _context.products.Where(p => p.ProductCode.Equals(product.ProductCode)).FirstOrDefault();
+            if (a == null)
+            {
+                return new ObjectResult(new Message { status = "error", message = "Không tồn tại sản phẩm" });
+            }
+            else
+            {
+                a.Money = product.Money;
+                a.ProductName = product.ProductName;
+                a.PayMethod = product.PayMethod;
+                a.ProductStatus = product.ProductStatus;
+                _context.Update(a);
+                _context.SaveChanges();
+                return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = "Cập nhật sản phẩm thành công" });
+            }
         }
     }
    
