@@ -18,6 +18,7 @@ namespace mbal.Models
         public DbSet<Product> products { get; set; }
         public DbSet<Agency> agencies { get; set; }
         public DbSet<Insurrance> insurrances { get; set; }
+        public DbSet<Employee> employees { get; set; }
          
 
     }

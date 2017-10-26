@@ -42,7 +42,7 @@ namespace mbal.Controllers
             var product = _context.products.Where(p => p.ProductID == id).Include(p =>p.Insurrances).FirstOrDefault();
             if(product == null)
             {
-                return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = "Không tồn tại" });
+                return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = " ID sản phẩm không tồn tại" });
             }
             return new ObjectResult(product);
         }

@@ -27,6 +27,8 @@ namespace mbal.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<string>("BanhchCode");
+
                     b.Property<string>("ConsultantName");
 
                     b.Property<string>("Name");
@@ -47,6 +49,8 @@ namespace mbal.Migrations
 
                     b.Property<string>("Cmtnd");
 
+                    b.Property<string>("CustomerCode");
+
                     b.Property<DateTime>("Dob");
 
                     b.Property<string>("FullName");
@@ -58,6 +62,28 @@ namespace mbal.Migrations
                     b.HasKey("CustomerID");
 
                     b.ToTable("customers");
+                });
+
+            modelBuilder.Entity("mbal.Models.Employee", b =>
+                {
+                    b.Property<long>("EmployeeID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTime>("Dob");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("EmployeeNumber");
+
+                    b.Property<string>("Fullname");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.HasKey("EmployeeID");
+
+                    b.ToTable("employees");
                 });
 
             modelBuilder.Entity("mbal.Models.Insurrance", b =>
@@ -79,6 +105,8 @@ namespace mbal.Migrations
 
                     b.Property<int>("DurationOfInsurrance");
 
+                    b.Property<long>("EmployeeID");
+
                     b.Property<int>("FormOfPayment");
 
                     b.Property<long>("ProductID");
@@ -87,9 +115,17 @@ namespace mbal.Migrations
 
                     b.Property<string>("StatusFee");
 
+                    b.Property<DateTime>("TimeIn");
+
+                    b.Property<DateTime>("TimeOut");
+
+                    b.Property<string>("description");
+
                     b.HasKey("InsurranceID");
 
                     b.HasIndex("CustomerID");
+
+                    b.HasIndex("EmployeeID");
 
                     b.HasIndex("ProductID");
 
@@ -110,6 +146,8 @@ namespace mbal.Migrations
                     b.Property<string>("ProductName");
 
                     b.Property<string>("ProductStatus");
+
+                    b.Property<string>("description");
 
                     b.HasKey("ProductID");
 
@@ -139,6 +177,11 @@ namespace mbal.Migrations
                     b.HasOne("mbal.Models.Customer", "Customer")
                         .WithMany("Insurrances")
                         .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("mbal.Models.Employee", "Employee")
+                        .WithMany("Insurrances")
+                        .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("mbal.Models.Product", "Product")

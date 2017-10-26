@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace mbal.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,6 +16,7 @@ namespace mbal.Migrations
                     AgencyID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BanhchCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConsultantName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -33,6 +34,7 @@ namespace mbal.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cmtnd = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dob = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -41,6 +43,24 @@ namespace mbal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_customers", x => x.CustomerID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "employees",
+                columns: table => new
+                {
+                    EmployeeID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dob = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fullname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_employees", x => x.EmployeeID);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,7 +73,8 @@ namespace mbal.Migrations
                     PayMethod = table.Column<int>(type: "int", nullable: false),
                     ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductStatus = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ProductStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -89,10 +110,14 @@ namespace mbal.Migrations
                     Create_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerID = table.Column<long>(type: "bigint", nullable: false),
                     DurationOfInsurrance = table.Column<int>(type: "int", nullable: false),
+                    EmployeeID = table.Column<long>(type: "bigint", nullable: false),
                     FormOfPayment = table.Column<int>(type: "int", nullable: false),
                     ProductID = table.Column<long>(type: "bigint", nullable: false),
                     StatusContract = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StatusFee = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    StatusFee = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TimeIn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeOut = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,6 +127,12 @@ namespace mbal.Migrations
                         column: x => x.CustomerID,
                         principalTable: "customers",
                         principalColumn: "CustomerID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_insurrances_employees_EmployeeID",
+                        column: x => x.EmployeeID,
+                        principalTable: "employees",
+                        principalColumn: "EmployeeID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_insurrances_products_ProductID",
@@ -115,6 +146,11 @@ namespace mbal.Migrations
                 name: "IX_insurrances_CustomerID",
                 table: "insurrances",
                 column: "CustomerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_insurrances_EmployeeID",
+                table: "insurrances",
+                column: "EmployeeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_insurrances_ProductID",
@@ -135,6 +171,9 @@ namespace mbal.Migrations
 
             migrationBuilder.DropTable(
                 name: "customers");
+
+            migrationBuilder.DropTable(
+                name: "employees");
 
             migrationBuilder.DropTable(
                 name: "products");

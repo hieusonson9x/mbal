@@ -8,6 +8,7 @@ namespace mbal.Models
     public class Agency
     {
         public long AgencyID { get; set; }
+        public string BanhchCode { get; set; }
         public string Name { get; set; }
         public string Phonenumber { get; set; }
         public string ConsultantName { get; set; }

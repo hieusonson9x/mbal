@@ -13,6 +13,7 @@ namespace mbal.Models
         public int PayMethod { get; set; }
         public string ProductStatus { get; set; }
         public string Money { set; get; }
+        public string description { set; get; }
 
         public List<Insurrance> Insurrances { get; set; }
     }
