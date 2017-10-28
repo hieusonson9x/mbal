@@ -23,5 +23,21 @@ namespace mbal.Common
             { return false; }
             else { return true; }
         }
+        public static bool ValidateCustomer(Customer customer)
+        {
+            return true;
+        }
+        public static bool ValidateEmployee(Employee employee)
+        {
+            return true;
+        }
+        public static bool ValidateProduct(Product product)
+        {
+            return true;
+        }
+        public static bool ValidateUser(User user)
+        {
+            return true;
+        }
     }
 }

@@ -36,5 +36,14 @@ namespace mbal.Common
         public const string ERROR_ADD_AG = "ID hoặc mã chi nhánh đã tồn tại trong hệ thống";
         public const string DEL_SUCCESS_AG = "Xóa thành công chi nhánh ";
         public const string UPDATE_SUCCESS_AG = "Cập nhật thành công chi nhánh";
+
+
+        /*
+            Nhân viên
+         */
+        public const string ERROR_NOT_FOUND_EP = "Không tồn tại mã số nhân viên trong hệ thống";
+        public const string ERROR_ADD_EP = "ID hoặc mã số nhân viên đã tồn tại trong hệ thống";
+        public const string DEL_SUCCESS_EP = "Xóa thành công nhân viên";
+        public const string UPDATE_SUCCES_EP = "Cập nhật thành công nhân viên";
     }
 }
