@@ -31,5 +31,13 @@ namespace mbal.Repository
                              select c).ToList();
             return customers;
         }
+
+        public List<Insurrance> getInsurranceOfEmployee(String idEmployee)
+        {
+            var insurrances = (from e in _context.employees
+                               join i in _context.insurrances on e.EmployeeID equals i.EmployeeID
+                               select i).ToList();
+            return insurrances;
+        }
     }
 }

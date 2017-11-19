@@ -18,5 +18,10 @@ namespace mbal.Service
             this.context = context;
             this._agencyRepository = new AgencyRepository(context);
         }
+
+        public List<Insurrance> getInsurranceOfAgency(String codeAgency)
+        {
+            return this._agencyRepository.getInsurranceOfAgency(codeAgency);
+        }
     }
 }

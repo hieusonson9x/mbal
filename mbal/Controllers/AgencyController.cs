@@ -101,5 +101,11 @@ namespace mbal.Controllers
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = MyMessage.UPDATE_SUCCESS_AG });
             }
         }
+
+        [HttpGet("getInsurrance/{codeAgency}")]
+        public List<Insurrance> getInsurranceOfAgency(String codeAgency)
+        {
+            return agencyService.getInsurranceOfAgency(codeAgency);
+        }
     }
 }

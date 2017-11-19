@@ -139,5 +139,34 @@ namespace mbal.Controllers
             }
         }
 
+        [HttpGet("getByStatusContract/{status}")]
+        public IActionResult getByStatusContract(string status)
+        {
+
+            var insurrance = _context.insurrances.Where(c => c.StatusContract == status).Include(i => i.Product).Include(i => i.Employee).Include(c => c.Customer).ToList();
+
+            if (insurrance == null)
+            {
+
+                return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = "không tồn tại hợp đồng thỏa mãn trong hệ thống" });
+            }
+            return new ObjectResult(insurrance);
+        }
+
+        [HttpGet("getByStatusFee/{status}")]
+        public IActionResult getByStatusFee(string status)
+        {
+
+            var insurrance = _context.insurrances.Where(c => c.StatusFee == status).Include(i => i.Product).Include(i => i.Employee).Include(c => c.Customer).ToList();
+
+            if (insurrance == null)
+            {
+                return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = "không tồn tại hợp đồng thỏa mãn trong hệ thống" });
+            }
+            return new ObjectResult(insurrance);
+        }
+
+
+
     }
 }

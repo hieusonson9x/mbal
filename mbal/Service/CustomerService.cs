@@ -17,5 +17,10 @@ namespace mbal.Service
             this.context = context;
             this._customerRepository = new CustomerRepository(context);
         }
+
+        public List<Insurrance> getInsurranceOfCustomer(String idCustomer)
+        {
+            return _customerRepository.getInsurranceOfCustomer(idCustomer);
+        }
     }
 }

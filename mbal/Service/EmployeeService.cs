@@ -27,5 +27,10 @@ namespace mbal.Service
         {
             return _employeeRepository.getCustomerOfEmployee(idEmployee);
         }
+
+        public List<Insurrance> getInsurranceOfEmployee(String idEmployee)
+        {
+            return _employeeRepository.getInsurranceOfEmployee(idEmployee);
+        }
     }
 }

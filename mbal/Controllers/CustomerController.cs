@@ -107,5 +107,11 @@ namespace mbal.Controllers
             }
         }
 
+        [HttpGet("get-insurrance/{idCustomer}")]
+        public List<Insurrance> getInsurranceOfCustomer(String idCustomer)
+        {
+            return customerService.getInsurranceOfCustomer(idCustomer);
+        }
+
     }
 }

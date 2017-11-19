@@ -112,5 +112,11 @@ namespace mbal.Controllers
         {
             return employeeService.getCustomerOfEmployee(enumber);
         }
+
+        [HttpGet("get-insurrance/{enumber}")]
+        public List<Insurrance> getInsurranceOfEmployee(string enumber)
+        {
+            return employeeService.getInsurranceOfEmployee(enumber);
+        }
     }
 }
