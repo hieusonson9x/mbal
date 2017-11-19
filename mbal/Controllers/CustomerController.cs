@@ -7,6 +7,7 @@ using mbal.Models;
 using System.Collections;
 using mbal.Common;
 using Microsoft.EntityFrameworkCore;
+using mbal.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,10 +17,12 @@ namespace mbal.Controllers
     public class CustomerController : Controller
     {
         private readonly UserContext _context;
+        private readonly CustomerService customerService;
 
         public CustomerController(UserContext context)
         {
             this._context = context;
+            this.customerService = new CustomerService(context);
         }
 
         [HttpGet("getAll")]

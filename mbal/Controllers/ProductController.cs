@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using mbal.Models;
 using mbal.Common;
 using Microsoft.EntityFrameworkCore;
+using mbal.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,11 +16,12 @@ namespace mbal.Controllers
     public class ProductController : Controller
     {
         private readonly UserContext _context;
+        private ProductService productService;
 
         public ProductController(UserContext context)
         {
             _context = context;
-
+            productService = new ProductService(_context);
             if (_context.users.Count() == 0)
             {
                 _context.users.Add(new User { username = "hieunm" });
@@ -129,6 +131,16 @@ namespace mbal.Controllers
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = "Cập nhật sản phẩm thành công" });
             }
         }
+
+        //[Route("/product/product-use")]
+        [HttpGet("{product-use}")]
+        [HttpGet]
+        public List<Product> getallproduct()
+        {
+            var list = productService.getProductUse();
+            return list;
+        }
+
     }
    
 }
