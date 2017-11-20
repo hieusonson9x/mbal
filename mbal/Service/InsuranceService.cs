@@ -17,5 +17,15 @@ namespace mbal.Service
             this.context = context;
             this._insuranceRepository = new InsuranceRepository(context);
         }
+
+        public List<Payment> getPaymentOfInsurrance(string insurranceId)
+        {
+            return _insuranceRepository.getPaymentOfInsurrance(insurranceId);
+        }
+
+        public List<Compensation> getCompensationOfInsurrance(string insurranceId)
+        {
+            return _insuranceRepository.getCompensationOfInsurrance(insurranceId);
+        }
     }
 }

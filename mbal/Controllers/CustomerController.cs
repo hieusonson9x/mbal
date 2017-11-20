@@ -108,9 +108,37 @@ namespace mbal.Controllers
         }
 
         [HttpGet("get-insurrance/{idCustomer}")]
-        public List<Insurrance> getInsurranceOfCustomer(String idCustomer)
+        public List<Insurrance> getInsurranceOfCustomer(string idCustomer)
         {
             return customerService.getInsurranceOfCustomer(idCustomer);
+        }
+
+        [HttpGet("get-all-money-payment/{codeCustomer}")]
+        public float getallMoneyPaymentOfCustomer(string customerCode)
+        {
+            var result = customerService.getallMoneyPaymentOfCustomer(customerCode);
+            return result;
+        }
+
+        [HttpGet("get-all-money-compensation/{codeCustomer}")]
+        public float getallMoneyCompensationOfCustomer(string customerCode)
+        {
+            var result = customerService.getallMoneyCompensationOfCustomer(customerCode);
+            return result;
+        }
+
+        [HttpGet("get-payment/{codeCustomer}")]
+        public List<Payment> getPaymentOfCustomer(string customerCode)
+        {
+            var result = customerService.getPaymentOfCustomer(customerCode);
+                return result;
+        }
+
+        [HttpGet("get-compensation/{codeCustomer}")]
+        public List<Compensation> getCompensationOfCustomer(string customerCode)
+        {
+            var result = customerService.getCompensationOfCustomer(customerCode);
+            return result;
         }
 
     }
