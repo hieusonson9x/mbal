@@ -23,19 +23,21 @@ namespace mbal.Repository
             return employees;
         }
 
-        public List<Customer> getCustomerOfEmployee(string idEmployee)
+        public List<Customer> getCustomerOfEmployee(long idEmployee)
         {
             var customers = (from e in _context.employees
                              join i in _context.insurrances on e.EmployeeID equals i.EmployeeID
                              join c in _context.customers on i.CustomerID equals c.CustomerID
+                             where e.EmployeeID == idEmployee
                              select c).ToList();
             return customers;
         }
 
-        public List<Insurrance> getInsurranceOfEmployee(String idEmployee)
+        public List<Insurrance> getInsurranceOfEmployee(long idEmployee)
         {
             var insurrances = (from e in _context.employees
                                join i in _context.insurrances on e.EmployeeID equals i.EmployeeID
+                               where e.EmployeeID == idEmployee
                                select i).ToList();
             return insurrances;
         }

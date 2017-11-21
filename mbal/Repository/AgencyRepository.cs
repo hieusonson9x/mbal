@@ -16,10 +16,11 @@ namespace mbal.Repository
             this._context = context;
         }
 
-        public List<Insurrance> getInsurranceOfAgency(String codeAgency)
+        public List<Insurrance> getInsurranceOfAgency(long idAgency)
         {
             var insurrances = (from a in _context.agencies
                                join i in _context.insurrances on a.BanhchCode equals i.BanhchCode
+                               where a.AgencyID == idAgency
                                select i).ToList();
             return insurrances;
         }

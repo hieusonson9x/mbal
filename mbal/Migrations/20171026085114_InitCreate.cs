@@ -98,6 +98,42 @@ namespace mbal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "compensations",
+                columns: table => new
+                {
+                    compensationId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    acceptCompensation = table.Column<Boolean>(type: "bigint", nullable: true),
+                    compensationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    compensationMoney = table.Column<float>(type: "float(max)", nullable: true),
+                    DateOfCompensation= table.Column<DateTime>(type: "datetime2", nullable: true),
+                    reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    customerCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    insurranceId = table.Column<long>(type: "bigint(max)", nullable: true)
+
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_compensations", x => x.compensationId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "payments",
+                columns: table => new
+                {
+                    paymentId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    amountPayment = table.Column<float>(type: "float(max)", nullable: true),
+                    customerCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    insurranceId = table.Column<long>(type: "float(max)", nullable: true),
+                    createAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_payments", x => x.paymentId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "insurrances",
                 columns: table => new
                 {
@@ -141,6 +177,7 @@ namespace mbal.Migrations
                         principalColumn: "ProductID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
 
             migrationBuilder.CreateIndex(
                 name: "IX_insurrances_CustomerID",

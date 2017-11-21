@@ -23,12 +23,12 @@ namespace mbal.Service
             return _employeeRepository.getEmployeeHavenotCustomer();
         }
 
-        public List<Customer> getCustomerOfEmployee(string idEmployee)
+        public List<Customer> getCustomerOfEmployee(long idEmployee)
         {
             return _employeeRepository.getCustomerOfEmployee(idEmployee);
         }
 
-        public List<Insurrance> getInsurranceOfEmployee(String idEmployee)
+        public List<Insurrance> getInsurranceOfEmployee(long idEmployee)
         {
             return _employeeRepository.getInsurranceOfEmployee(idEmployee);
         }

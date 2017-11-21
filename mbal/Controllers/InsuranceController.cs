@@ -167,14 +167,14 @@ namespace mbal.Controllers
         }
 
         [HttpGet("get-payment-Insurrance/{insurranceId}")]
-        public List<Payment> getPaymentOfInsurrance(string insurranceId)
+        public List<Payment> getPaymentOfInsurrance(long insurranceId)
         {
             var result = insuranceService.getPaymentOfInsurrance(insurranceId);
             return result;
         }
 
         [HttpGet("get-compensation-Insurrance/{insurranceId}")]
-        public List<Compensation> getCompensationOfInsurrance(string insurranceId)
+        public List<Compensation> getCompensationOfInsurrance(long insurranceId)
         {
             var result = insuranceService.getCompensationOfInsurrance(insurranceId);
             return result;

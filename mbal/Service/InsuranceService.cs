@@ -18,12 +18,12 @@ namespace mbal.Service
             this._insuranceRepository = new InsuranceRepository(context);
         }
 
-        public List<Payment> getPaymentOfInsurrance(string insurranceId)
+        public List<Payment> getPaymentOfInsurrance(long insurranceId)
         {
             return _insuranceRepository.getPaymentOfInsurrance(insurranceId);
         }
 
-        public List<Compensation> getCompensationOfInsurrance(string insurranceId)
+        public List<Compensation> getCompensationOfInsurrance(long insurranceId)
         {
             return _insuranceRepository.getCompensationOfInsurrance(insurranceId);
         }

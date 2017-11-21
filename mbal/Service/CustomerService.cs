@@ -18,7 +18,7 @@ namespace mbal.Service
             this._customerRepository = new CustomerRepository(context);
         }
 
-        public List<Insurrance> getInsurranceOfCustomer(string idCustomer)
+        public List<Insurrance> getInsurranceOfCustomer(long idCustomer)
         {
             return _customerRepository.getInsurranceOfCustomer(idCustomer);
         }
