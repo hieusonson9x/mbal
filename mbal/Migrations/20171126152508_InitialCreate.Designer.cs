@@ -11,14 +11,14 @@ using System;
 namespace mbal.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20171026085114_InitCreate")]
-    partial class InitCreate
+    [Migration("20171126152508_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("mbal.Models.Agency", b =>
@@ -39,6 +39,30 @@ namespace mbal.Migrations
                     b.HasKey("AgencyID");
 
                     b.ToTable("agencies");
+                });
+
+            modelBuilder.Entity("mbal.Models.Compensation", b =>
+                {
+                    b.Property<long>("compensationId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateOfCompensation");
+
+                    b.Property<long>("acceptCompensation");
+
+                    b.Property<DateTime>("compensationDate");
+
+                    b.Property<float>("compensationMoney");
+
+                    b.Property<string>("customerCode");
+
+                    b.Property<long>("insurranceId");
+
+                    b.Property<string>("reason");
+
+                    b.HasKey("compensationId");
+
+                    b.ToTable("compensations");
                 });
 
             modelBuilder.Entity("mbal.Models.Customer", b =>
@@ -131,6 +155,24 @@ namespace mbal.Migrations
                     b.HasIndex("ProductID");
 
                     b.ToTable("insurrances");
+                });
+
+            modelBuilder.Entity("mbal.Models.Payment", b =>
+                {
+                    b.Property<long>("paymentId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<float>("amountPayment");
+
+                    b.Property<DateTime>("createAt");
+
+                    b.Property<string>("customerCode");
+
+                    b.Property<long>("insurranceId");
+
+                    b.HasKey("paymentId");
+
+                    b.ToTable("payments");
                 });
 
             modelBuilder.Entity("mbal.Models.Product", b =>

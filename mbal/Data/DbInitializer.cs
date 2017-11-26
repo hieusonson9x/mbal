@@ -100,6 +100,17 @@ namespace mbal.Data
                 context.insurrances.Add(i);
             }
             context.SaveChanges();
+
+            context.SaveChanges();
+            var payments = new Payment[]
+            {
+                new Payment{amountPayment=100, customerCode ="A2017001",insurranceId=1,createAt=DateTime.Now}
+            };
+            foreach (var i in payments)
+            {
+                context.payments.Add(i);
+            }
+            context.SaveChanges();
         }
     }
 }
