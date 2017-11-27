@@ -23,16 +23,7 @@ namespace mbal.Repository
         {
             
             context.Database.EnsureCreated();
-
-            //var products = context.products.FromSql("select * from dbo.products").ToList();
             var products = (from p in context.products join i in context.insurrances on p.ProductID equals i.ProductID select p).ToList();
-            //var products1 = context.products.Join(context.insurrances,product => product.ProductID,insurrance => insurrance.ProductID,
-            //    (product)=>new { Product = product});
-            //var cmd = new SqlCommand("SELECT * FROM PRODUCTS", );
-            //var p1 = context.Database.SqlQuery<string>;
-            //var products1 = context.Database.ExecuteSqlCommand("");
-            //context.ExecuteStoreQuery
-
             return products;
         }
     }
