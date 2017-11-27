@@ -18,9 +18,6 @@ namespace mbal.Repository
             this._context = context;
         }
 
-       
-
-        
 
         public List<Product> getProductUse()
         {
