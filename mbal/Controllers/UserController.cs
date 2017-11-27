@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using mbal.Models;
+using mbal.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,11 +14,12 @@ namespace mbal.Controllers
     public class UserController : Controller
     {
         private readonly UserContext _context;
+        private readonly UserService userService;
 
         public UserController(UserContext context)
         {
             _context = context;
-
+            this.userService = new UserService(context);
             if (_context.users.Count() == 0)
             {
                 _context.users.Add(new User { username = "hieunm" });

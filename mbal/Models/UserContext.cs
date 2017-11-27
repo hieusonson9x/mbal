@@ -19,7 +19,8 @@ namespace mbal.Models
         public DbSet<Agency> agencies { get; set; }
         public DbSet<Insurrance> insurrances { get; set; }
         public DbSet<Employee> employees { get; set; }
-         
+        public DbSet<Compensation> compensations { get; set; }
+        public DbSet<Payment> payments { get; set; }
 
     }
 }

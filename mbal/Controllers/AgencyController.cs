@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using mbal.Models;
 using Microsoft.EntityFrameworkCore;
 using mbal.Common;
+using mbal.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,9 +16,11 @@ namespace mbal.Controllers
     public class AgencyController : Controller
     {
         private readonly UserContext _context;
+        private readonly AgencyService agencyService;
         public AgencyController(UserContext context)
         {
             this._context = context;
+            this.agencyService = new AgencyService(context);
         }
         [HttpGet]
         public IEnumerable<Agency> getAll()
@@ -97,6 +100,12 @@ namespace mbal.Controllers
                 _context.SaveChanges();
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = MyMessage.UPDATE_SUCCESS_AG });
             }
+        }
+
+        [HttpGet("getInsurrance/{codeAgency}")]
+        public List<Insurrance> getInsurranceOfAgency(long idAgency)
+        {
+            return agencyService.getInsurranceOfAgency(idAgency);
         }
     }
 }

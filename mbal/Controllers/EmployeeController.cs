@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using mbal.Models;
 using Microsoft.EntityFrameworkCore;
 using mbal.Common;
+using mbal.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,9 +16,11 @@ namespace mbal.Controllers
     public class EmployeeController : Controller
     {
         private readonly UserContext _context;
+        private readonly EmployeeService employeeService;
         public EmployeeController(UserContext context)
         {
             _context = context;
+            this.employeeService = new EmployeeService(context);
         }
         [HttpGet]
         public IEnumerable<Employee> getAll()
@@ -96,6 +99,24 @@ namespace mbal.Controllers
                 _context.SaveChanges();
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = MyMessage.UPDATE_SUCCES_EP });
             }
+        }
+
+        [HttpGet("get-ep-havennot-customer")]
+        public List<Employee> getEmployeeHavenotCustomer()
+        {
+            return employeeService.getEmployeeHavenotCustomer();
+        }
+
+        [HttpGet("get-customer/{enumber}")]
+        public List<Customer> getCustomerOfEmployee(long enumber)
+        {
+            return employeeService.getCustomerOfEmployee(enumber);
+        }
+
+        [HttpGet("get-insurrance/{enumber}")]
+        public List<Insurrance> getInsurranceOfEmployee(long enumber)
+        {
+            return employeeService.getInsurranceOfEmployee(enumber);
         }
     }
 }

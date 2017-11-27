@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using mbal.Models;
 using Microsoft.EntityFrameworkCore;
 using mbal.Common;
+using mbal.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,9 +16,11 @@ namespace mbal.Controllers
     public class InsuranceController : Controller
     {
         private readonly UserContext _context;
+        private readonly InsuranceService insuranceService;
         public InsuranceController(UserContext context)
         {
             this._context = context;
+            this.insuranceService = new InsuranceService(context);
         }
         // GET: api/values
         [HttpGet]
@@ -135,6 +138,49 @@ namespace mbal.Controllers
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = MyMessage.DELETE_SUCCESS + contactNumber });
             }
         }
+
+        [HttpGet("getByStatusContract/{status}")]
+        public IActionResult getByStatusContract(string status)
+        {
+
+            var insurrance = _context.insurrances.Where(c => c.StatusContract == status).Include(i => i.Product).Include(i => i.Employee).Include(c => c.Customer).ToList();
+
+            if (insurrance == null)
+            {
+
+                return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = "không tồn tại hợp đồng thỏa mãn trong hệ thống" });
+            }
+            return new ObjectResult(insurrance);
+        }
+
+        [HttpGet("getByStatusFee/{status}")]
+        public IActionResult getByStatusFee(string status)
+        {
+
+            var insurrance = _context.insurrances.Where(c => c.StatusFee == status).Include(i => i.Product).Include(i => i.Employee).Include(c => c.Customer).ToList();
+
+            if (insurrance == null)
+            {
+                return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = "không tồn tại hợp đồng thỏa mãn trong hệ thống" });
+            }
+            return new ObjectResult(insurrance);
+        }
+
+        [HttpGet("get-payment-Insurrance/{insurranceId}")]
+        public List<Payment> getPaymentOfInsurrance(long insurranceId)
+        {
+            var result = insuranceService.getPaymentOfInsurrance(insurranceId);
+            return result;
+        }
+
+        [HttpGet("get-compensation-Insurrance/{insurranceId}")]
+        public List<Compensation> getCompensationOfInsurrance(long insurranceId)
+        {
+            var result = insuranceService.getCompensationOfInsurrance(insurranceId);
+            return result;
+        }
+
+
 
     }
 }

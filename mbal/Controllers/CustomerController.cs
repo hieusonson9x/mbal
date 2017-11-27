@@ -7,6 +7,7 @@ using mbal.Models;
 using System.Collections;
 using mbal.Common;
 using Microsoft.EntityFrameworkCore;
+using mbal.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,10 +17,12 @@ namespace mbal.Controllers
     public class CustomerController : Controller
     {
         private readonly UserContext _context;
+        private readonly CustomerService customerService;
 
         public CustomerController(UserContext context)
         {
             this._context = context;
+            this.customerService = new CustomerService(context);
         }
 
         [HttpGet("getAll")]
@@ -102,6 +105,40 @@ namespace mbal.Controllers
                 _context.SaveChanges();
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = MyMessage.DELETE_SUCCESS + code });
             }
+        }
+
+        [HttpGet("get-insurrance/{idCustomer}")]
+        public List<Insurrance> getInsurranceOfCustomer(long idCustomer)
+        {
+            return customerService.getInsurranceOfCustomer(idCustomer);
+        }
+
+        [HttpGet("get-all-money-payment/{codeCustomer}")]
+        public float getallMoneyPaymentOfCustomer(string customerCode)
+        {
+            var result = customerService.getallMoneyPaymentOfCustomer(customerCode);
+            return result;
+        }
+
+        [HttpGet("get-all-money-compensation/{codeCustomer}")]
+        public float getallMoneyCompensationOfCustomer(string customerCode)
+        {
+            var result = customerService.getallMoneyCompensationOfCustomer(customerCode);
+            return result;
+        }
+
+        [HttpGet("get-payment/{codeCustomer}")]
+        public List<Payment> getPaymentOfCustomer(string customerCode)
+        {
+            var result = customerService.getPaymentOfCustomer(customerCode);
+                return result;
+        }
+
+        [HttpGet("get-compensation/{codeCustomer}")]
+        public List<Compensation> getCompensationOfCustomer(string customerCode)
+        {
+            var result = customerService.getCompensationOfCustomer(customerCode);
+            return result;
         }
 
     }
