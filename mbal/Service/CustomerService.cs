@@ -42,5 +42,10 @@ namespace mbal.Service
         {
             return _customerRepository.getCompensationOfCustomer(customerCode);
         }
+
+        public List<Customer> getListNewCustomerInTime(DateTime time1, DateTime time2)
+        {
+            return _customerRepository.getListNewCustomerInTime(time1, time2);
+        }
     }
 }

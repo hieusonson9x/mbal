@@ -7,6 +7,7 @@ using mbal.Models;
 using mbal.Common;
 using Microsoft.EntityFrameworkCore;
 using mbal.Service;
+using mbal.DAO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -131,14 +132,19 @@ namespace mbal.Controllers
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = "Cập nhật sản phẩm thành công" });
             }
         }
-
-        //[Route("/product/product-use")]
-        [HttpGet("{product-use}")]
-        [HttpGet]
+        
+        [HttpGet("product-use")]
         public List<Product> getallproduct()
         {
             var list = productService.getProductUse();
             return list;
+        }
+
+        [HttpGet("top-product")]
+        public List<TopSellProduct> getTopProduct()
+        {
+            var result = productService.getTopProduct();
+            return result;
         }
 
     }

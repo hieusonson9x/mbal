@@ -33,7 +33,7 @@ namespace mbal.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var compensation = _context.compensations.Where(p => p.compensationId == id).FirstOrDefault();
+            var compensation = _context.compensations.Where(p => p.CompensationId == id).FirstOrDefault();
             if (compensation == null)
             {
                 return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = " ID  không tồn tại" });
@@ -44,7 +44,7 @@ namespace mbal.Controllers
         [HttpDelete("deleteById/{id}", Name = "deteleCompensation")]
         public IActionResult DeleteById(long id)
         {
-            var compensation = _context.compensations.Where(p => p.compensationId == id).FirstOrDefault();
+            var compensation = _context.compensations.Where(p => p.CompensationId == id).FirstOrDefault();
             if (compensation == null)
             {
                 return new ObjectResult(new Message { status = "error", message = "ID không tồn tại" });
@@ -65,10 +65,10 @@ namespace mbal.Controllers
             {
                 return new ObjectResult(new Message { status = "error", message = "Dữ liệu không hợp lệ" });
             }
-            var a = _context.compensations.Where(p => p.compensationId == compensation.compensationId).FirstOrDefault();
+            var a = _context.compensations.Where(p => p.CompensationId == compensation.CompensationId).FirstOrDefault();
             if (a == null)
             {
-                compensation.compensationId = 0;
+                compensation.CompensationId = 0;
                 _context.compensations.Add(compensation);
                 _context.SaveChanges();
 
@@ -87,18 +87,18 @@ namespace mbal.Controllers
             {
                 return new ObjectResult(new Message { status = "error", message = "Dữ liệu không hợp lệ" });
             }
-            var a = _context.compensations.Where(p => p.compensationId.Equals(compensation.compensationId)).FirstOrDefault();
+            var a = _context.compensations.Where(p => p.CompensationId.Equals(compensation.CompensationId)).FirstOrDefault();
             if (a == null)
             {
                 return new ObjectResult(new Message { status = "error", message = "Không tồn tại" });
             }
             else
             {
-                a.compensationId = compensation.compensationId;
-                a.compensationMoney = compensation.compensationMoney;
-                a.customerCode = compensation.customerCode;
-                a.insurranceId = compensation.insurranceId;
-                a.reason = compensation.reason;
+                a.CompensationId = compensation.CompensationId;
+                a.CompensationMoney = compensation.CompensationMoney;
+                a.CustomerCode = compensation.CustomerCode;
+                a.InsurranceId = compensation.InsurranceId;
+                a.Reason = compensation.Reason;
                 _context.Update(a);
                 _context.SaveChanges();
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = "Cập nhật  thành công" });

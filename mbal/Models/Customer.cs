@@ -18,6 +18,7 @@ namespace mbal.Models
         public string Address { get; set; }
         public string Sex { get; set; }
         public String Phonenumber { get; set; }
+        public DateTime CreateAt { get; set; }
 
         public List<Insurrance> Insurrances { get; set; }
 

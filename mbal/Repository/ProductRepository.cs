@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using mbal.Models;
 using Microsoft.EntityFrameworkCore;
+using mbal.DAO;
 
 namespace mbal.Repository
 {
@@ -22,9 +23,20 @@ namespace mbal.Repository
         public List<Product> getProductUse()
         {
             
-            context.Database.EnsureCreated();
-            var products = (from p in context.products join i in context.insurrances on p.ProductID equals i.ProductID select p).ToList();
+            _context.Database.EnsureCreated();
+            var products = (from p in _context.products join i in _context.insurrances on p.ProductID equals i.ProductID select p).ToList();
             return products;
+        }
+
+        public List<TopSellProduct> getTopProduct()
+        {
+            var product = (from i in _context.insurrances group i by i.ProductID into g
+                           orderby g.Count() descending
+                           select new TopSellProduct {
+                               ProductId=g.First().ProductID.ToString(),
+                               Quantity = g.Count().ToString()
+                           }).Take(10).ToList();
+            return product;
         }
     }
 }

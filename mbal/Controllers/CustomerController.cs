@@ -141,5 +141,12 @@ namespace mbal.Controllers
             return result;
         }
 
+        [HttpGet("get-list-customer-in-time/{time1}/{time2}")]
+        public List<Customer> getListNewCustomerInTime(DateTime time1, DateTime time2)
+        {
+            var result = customerService.getListNewCustomerInTime(time1, time2);
+            return result;
+        }
+
     }
 }

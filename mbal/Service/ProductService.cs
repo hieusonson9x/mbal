@@ -4,6 +4,7 @@ using mbal.Repository;
 using System.Linq;
 using System.Threading.Tasks;
 using mbal.Models;
+using mbal.DAO;
 
 namespace mbal.Service
 {
@@ -23,6 +24,11 @@ namespace mbal.Service
         {            
             var results= _productRepository.getProductUse();
             return results;
+        }
+
+        public List<TopSellProduct> getTopProduct()
+        {
+            return _productRepository.getTopProduct();
         }
     }
 }

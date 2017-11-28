@@ -27,5 +27,10 @@ namespace mbal.Service
         {
             return _insuranceRepository.getCompensationOfInsurrance(insurranceId);
         }
+
+        public List<Insurrance> getInsuranceinTime(DateTime time1, DateTime time2)
+        {
+            return _insuranceRepository.getInsuranceinTime(time1, time2);
+        }
     }
 }

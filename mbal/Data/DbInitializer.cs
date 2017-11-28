@@ -104,7 +104,7 @@ namespace mbal.Data
             context.SaveChanges();
             var payments = new Payment[]
             {
-                new Payment{amountPayment=100, customerCode ="A2017001",insurranceId=1,createAt=DateTime.Now}
+                new Payment{AmountPayment=100, CustomerCode ="A2017001",InsurranceId=1,CreateAt=DateTime.Now}
             };
             foreach (var i in payments)
             {

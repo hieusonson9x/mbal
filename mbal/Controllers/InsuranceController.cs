@@ -180,6 +180,13 @@ namespace mbal.Controllers
             return result;
         }
 
+        [HttpGet("get-Insurrance-in-time/{time1}/{time2}")]
+        public List<Insurrance> getInsuranceinTime(DateTime time1, DateTime time2)
+        {
+            var result = insuranceService.getInsuranceinTime(time1, time2);
+            return result;
+        }
+
 
 
     }

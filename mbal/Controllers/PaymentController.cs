@@ -33,7 +33,7 @@ namespace mbal.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var product = _context.payments.Where(p => p.paymentId == id).FirstOrDefault();
+            var product = _context.payments.Where(p => p.PaymentId == id).FirstOrDefault();
             if (product == null)
             {
                 return new ObjectResult(new Message { status = StatusMessage.error.ToString(), message = " ID  không tồn tại" });
@@ -44,7 +44,7 @@ namespace mbal.Controllers
         [HttpDelete("deleteById/{id}", Name = "detelePayment")]
         public IActionResult DeleteById(long id)
         {
-            var payment = _context.payments.Where(p => p.paymentId == id).FirstOrDefault();
+            var payment = _context.payments.Where(p => p.PaymentId == id).FirstOrDefault();
             if (payment == null)
             {
                 return new ObjectResult(new Message { status = "error", message = "ID không tồn tại" });
@@ -65,10 +65,10 @@ namespace mbal.Controllers
             {
                 return new ObjectResult(new Message { status = "error", message = "Dữ liệu không hợp lệ" });
             }
-            var a = _context.payments.Where(p => p.paymentId == payment.paymentId ).FirstOrDefault();
+            var a = _context.payments.Where(p => p.PaymentId == payment.PaymentId ).FirstOrDefault();
             if (a == null)
             {
-                payment.paymentId = 0;
+                payment.PaymentId = 0;
                 _context.payments.Add(payment);
                 _context.SaveChanges();
 
@@ -87,17 +87,17 @@ namespace mbal.Controllers
             {
                 return new ObjectResult(new Message { status = "error", message = "Dữ liệu không hợp lệ" });
             }
-            var a = _context.payments.Where(p => p.paymentId.Equals(payment.paymentId)).FirstOrDefault();
+            var a = _context.payments.Where(p => p.PaymentId.Equals(payment.PaymentId)).FirstOrDefault();
             if (a == null)
             {
                 return new ObjectResult(new Message { status = "error", message = "Không tồn tại" });
             }
             else
             {
-                a.amountPayment = payment.amountPayment;
-                a.customerCode = payment.customerCode;
-                a.insurranceId = payment.insurranceId;
-                a.createAt = payment.createAt;
+                a.AmountPayment = payment.AmountPayment;
+                a.CustomerCode = payment.CustomerCode;
+                a.InsurranceId = payment.InsurranceId;
+                a.CreateAt = payment.CreateAt;
                 _context.Update(a);
                 _context.SaveChanges();
                 return new ObjectResult(new Message { status = StatusMessage.success.ToString(), message = "Cập nhật  thành công" });
