@@ -42,24 +42,24 @@ namespace mbal.Migrations
 
             modelBuilder.Entity("mbal.Models.Compensation", b =>
                 {
-                    b.Property<long>("compensationId")
+                    b.Property<long>("CompensationId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<long>("AcceptCompensation");
+
+                    b.Property<DateTime>("CompensationDate");
+
+                    b.Property<float>("CompensationMoney");
+
+                    b.Property<string>("CustomerCode");
 
                     b.Property<DateTime>("DateOfCompensation");
 
-                    b.Property<long>("acceptCompensation");
+                    b.Property<long>("InsurranceId");
 
-                    b.Property<DateTime>("compensationDate");
+                    b.Property<string>("Reason");
 
-                    b.Property<float>("compensationMoney");
-
-                    b.Property<string>("customerCode");
-
-                    b.Property<long>("insurranceId");
-
-                    b.Property<string>("reason");
-
-                    b.HasKey("compensationId");
+                    b.HasKey("CompensationId");
 
                     b.ToTable("compensations");
                 });
@@ -72,6 +72,8 @@ namespace mbal.Migrations
                     b.Property<string>("Address");
 
                     b.Property<string>("Cmtnd");
+
+                    b.Property<DateTime>("CreateAt");
 
                     b.Property<string>("CustomerCode");
 
@@ -158,18 +160,18 @@ namespace mbal.Migrations
 
             modelBuilder.Entity("mbal.Models.Payment", b =>
                 {
-                    b.Property<long>("paymentId")
+                    b.Property<long>("PaymentId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<float>("amountPayment");
+                    b.Property<float>("AmountPayment");
 
-                    b.Property<DateTime>("createAt");
+                    b.Property<DateTime>("CreateAt");
 
-                    b.Property<string>("customerCode");
+                    b.Property<string>("CustomerCode");
 
-                    b.Property<long>("insurranceId");
+                    b.Property<long>("InsurranceId");
 
-                    b.HasKey("paymentId");
+                    b.HasKey("PaymentId");
 
                     b.ToTable("payments");
                 });

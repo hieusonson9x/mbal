@@ -30,19 +30,19 @@ namespace mbal.Migrations
                 name: "compensations",
                 columns: table => new
                 {
-                    compensationId = table.Column<long>(nullable: false)
+                    CompensationId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AcceptCompensation = table.Column<long>(nullable: false),
+                    CompensationDate = table.Column<DateTime>(nullable: false),
+                    CompensationMoney = table.Column<float>(nullable: false),
+                    CustomerCode = table.Column<string>(nullable: true),
                     DateOfCompensation = table.Column<DateTime>(nullable: false),
-                    acceptCompensation = table.Column<long>(nullable: false),
-                    compensationDate = table.Column<DateTime>(nullable: false),
-                    compensationMoney = table.Column<float>(nullable: false),
-                    customerCode = table.Column<string>(nullable: true),
-                    insurranceId = table.Column<long>(nullable: false),
-                    reason = table.Column<string>(nullable: true)
+                    InsurranceId = table.Column<long>(nullable: false),
+                    Reason = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_compensations", x => x.compensationId);
+                    table.PrimaryKey("PK_compensations", x => x.CompensationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,6 +53,7 @@ namespace mbal.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(nullable: true),
                     Cmtnd = table.Column<string>(nullable: true),
+                    CreateAt = table.Column<DateTime>(nullable: false),
                     CustomerCode = table.Column<string>(nullable: true),
                     Dob = table.Column<DateTime>(nullable: false),
                     FullName = table.Column<string>(nullable: true),
@@ -86,16 +87,16 @@ namespace mbal.Migrations
                 name: "payments",
                 columns: table => new
                 {
-                    paymentId = table.Column<long>(nullable: false)
+                    PaymentId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    amountPayment = table.Column<float>(nullable: false),
-                    createAt = table.Column<DateTime>(nullable: false),
-                    customerCode = table.Column<string>(nullable: true),
-                    insurranceId = table.Column<long>(nullable: false)
+                    AmountPayment = table.Column<float>(nullable: false),
+                    CreateAt = table.Column<DateTime>(nullable: false),
+                    CustomerCode = table.Column<string>(nullable: true),
+                    InsurranceId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_payments", x => x.paymentId);
+                    table.PrimaryKey("PK_payments", x => x.PaymentId);
                 });
 
             migrationBuilder.CreateTable(

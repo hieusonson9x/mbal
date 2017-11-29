@@ -102,10 +102,16 @@ namespace mbal.Controllers
             }
         }
 
-        [HttpGet("getInsurrance/{codeAgency}")]
+        [HttpGet("getInsurrance/{idAgency}")]
         public List<Insurrance> getInsurranceOfAgency(long idAgency)
         {
             return agencyService.getInsurranceOfAgency(idAgency);
+        }
+
+        //[HttpGet("getInsurrance/{banchCode}")]
+        public List<Insurrance> getInsurranceOfAgency(String banchCode)
+        {
+            return agencyService.getInsurranceOfAgency(banchCode);
         }
     }
 }

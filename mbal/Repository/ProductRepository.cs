@@ -35,7 +35,7 @@ namespace mbal.Repository
                            select new TopSellProduct {
                                ProductId=g.First().ProductID.ToString(),
                                Quantity = g.Count().ToString()
-                           }).Take(10).ToList();
+                           }).Take(3).ToList();
             return product;
         }
     }

@@ -23,5 +23,10 @@ namespace mbal.Service
         {
             return this._agencyRepository.getInsurranceOfAgency(idAgency);
         }
+
+        public List<Insurrance> getInsurranceOfAgency(String banchCode)
+        {
+            return this._agencyRepository.getInsurranceOfAgency(banchCode);
+        }
     }
 }
