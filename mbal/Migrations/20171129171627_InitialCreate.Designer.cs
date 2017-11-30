@@ -11,7 +11,7 @@ using System;
 namespace mbal.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20171129041801_InitialCreate")]
+    [Migration("20171129171627_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -143,6 +143,24 @@ namespace mbal.Data
                 context.payments.Add(i);
             }
             context.SaveChanges();
+
+            var compensation = new Compensation[]
+            {
+                new Compensation{AcceptCompensation=1,CompensationDate=DateTime.Parse("2016-12-18"),CompensationMoney=(float)101.1,DateOfCompensation=DateTime.Now,Reason="bồi thường thiệt hại",CustomerCode="A2017001",InsurranceId=1},
+                new Compensation{AcceptCompensation=1,CompensationDate=DateTime.Parse("2016-12-18"),CompensationMoney=(float)101.1,DateOfCompensation=DateTime.Now,Reason="bồi thường thiệt hại",CustomerCode="A2017001",InsurranceId=1},
+                new Compensation{AcceptCompensation=1,CompensationDate=DateTime.Parse("2016-12-18"),CompensationMoney=(float)101.1,DateOfCompensation=DateTime.Now,Reason="bồi thường thiệt hại",CustomerCode="A2017002",InsurranceId=2},
+                new Compensation{AcceptCompensation=1,CompensationDate=DateTime.Parse("2016-12-18"),CompensationMoney=(float)101.1,DateOfCompensation=DateTime.Now,Reason="bồi thường thiệt hại",CustomerCode="A2017002",InsurranceId=2},
+                new Compensation{AcceptCompensation=1,CompensationDate=DateTime.Parse("2016-12-18"),CompensationMoney=(float)101.1,DateOfCompensation=DateTime.Now,Reason="bồi thường thiệt hại",CustomerCode="A2017003",InsurranceId=3},
+                new Compensation{AcceptCompensation=1,CompensationDate=DateTime.Parse("2016-12-18"),CompensationMoney=(float)101.1,DateOfCompensation=DateTime.Now,Reason="bồi thường thiệt hại",CustomerCode="A2017003",InsurranceId=3},
+                new Compensation{AcceptCompensation=0,CompensationDate=DateTime.Parse("2016-12-18"),CompensationMoney=(float)101.1,DateOfCompensation=DateTime.Now,Reason="bồi thường thiệt hại",CustomerCode="A2017003",InsurranceId=3},
+                new Compensation{AcceptCompensation=0,CompensationDate=DateTime.Parse("2016-12-18"),CompensationMoney=(float)101.1,DateOfCompensation=DateTime.Now,Reason="bồi thường thiệt hại",CustomerCode="A2017003",InsurranceId=3},
+            };
+
+            foreach (var i in compensation)
+            {
+                context.compensations.Add(i);
+            }
+            context.SaveChanges();
         }
     }
 }

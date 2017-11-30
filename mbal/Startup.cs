@@ -41,6 +41,10 @@ namespace mbal
         public void Configure(IApplicationBuilder app)
         {
             app.UseAuthentication();
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            });
             app.UseMvc();
             
         }
